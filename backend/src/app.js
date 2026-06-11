@@ -4,6 +4,7 @@ import userRoutes from "./routes/user.routes.js";
 import todoRoutes from "./routes/todo.routes.js";
 import { AppDataSource } from "./config/data-source.js";
 import { startBot } from "./bot/bot.js";
+import cors from 'cors'
 
 dotenv.config();
 
@@ -28,3 +29,8 @@ const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
   console.log(`Server ${PORT} portda ishlamoqda`);
 });
+
+app.use(cors({
+  origin: 'https://node-lesson-typeorm.vercel.app',
+  credentials: true
+}))
