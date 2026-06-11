@@ -38,3 +38,12 @@ export const deleteUser = async (req, res, next) => {
 		next(error);
 	}
 };
+
+export const loginUser = async (req, res, next) => {
+  try {
+    const user = await userService.loginUser(req.body);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};

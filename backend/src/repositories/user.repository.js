@@ -24,6 +24,10 @@ export const deleteUserById = async (id) => {
   return user;
 };
 
+export const findUserByEmail = async (email) => {
+  return userRepo.findOneBy({ email });
+};
+
 
 export const findUserByTelegramChatId = async (telegramChatId) => {
   return userRepo.findOneBy({ telegramChatId: String(telegramChatId) });
