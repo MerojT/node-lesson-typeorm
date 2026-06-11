@@ -15,5 +15,6 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: true,
+  ssl: process.env.DB_HOST !== "localhost" ? { rejectUnauthorized: false } : false,
   entities: [UserEntity, TodoEntity],
 });
