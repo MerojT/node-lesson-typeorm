@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api.js'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Navbar.jsx'
 import './MyTodos.css'
@@ -17,10 +17,10 @@ function MyTodos() {
         navigate('/login')
         return
       }
-      const response = await axios.get('/todos', {
+      const response = await axios.get('/api/todos', {
         headers: { Authorization: `Bearer ${token}` }
       })
-      setTodos(response.data)
+      setTodos(Array.isArray(response.data) ? response.data : [])
     } catch (error) {
       if (error.response?.status === 401) {
         navigate('/login')
@@ -38,7 +38,7 @@ function MyTodos() {
     setDeletingId(id)
     try {
       const token = localStorage.getItem('token')
-      await axios.delete(`/todos/${id}`, {
+      await axios.delete(`/api/todos/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       setTodos(todos.filter(t => t.id !== id))

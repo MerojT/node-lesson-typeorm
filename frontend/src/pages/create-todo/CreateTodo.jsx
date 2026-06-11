@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios from '../../api.js'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Navbar.jsx'
 import './CreateTodo.css'

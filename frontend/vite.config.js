@@ -5,10 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/user': 'http://localhost:3000',
-      '/todos': 'http://localhost:3000',
-      '/admin': 'http://localhost:3000',
-      '/uploads': 'http://localhost:3000',
+      '/api' : {
+        target: 'http://localhost:3003',
+        changeOrigin: true
+      }
     }
   }
 })

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios from '../../api.js'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Navbar.jsx'
 import './Login.css'
@@ -19,7 +19,7 @@ function Login() {
     e.preventDefault()
     setLoading(true)
     try {
-      const response = await axios.post('/user/login', form)
+      const response = await axios.post('/api/users/login', form)
       const { token, refreshToken, user } = response.data
 
       localStorage.setItem('token', token)
@@ -28,7 +28,7 @@ function Login() {
 
       setMessage(`Xush kelibsiz, ${user.name}! ✅`)
       setIsError(false)
-      setTimeout(() => navigate('/my-todos'), 1200)
+      setTimeout(() => navigate('/'), 1200)
     } catch (error) {
       setMessage(error.response?.data?.message || "Email yoki parol noto'g'ri ❌")
       setIsError(true)

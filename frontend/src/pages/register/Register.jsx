@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios from '../../api.js'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Navbar.jsx'
 import './Register.css'
@@ -19,7 +19,7 @@ function Register() {
     e.preventDefault()
     setLoading(true)
     try {
-      await axios.post('/user/register', {
+      await axios.post('/api/users', {
         ...form,
         age: form.age ? Number(form.age) : undefined,
       })
