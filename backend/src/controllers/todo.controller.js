@@ -11,7 +11,7 @@ export const getTodos = async (req, res, next) => {
 
 export const getTodo = async (req, res, next) => {
   try {
-    const todo = await todoService.getTodo(Number(req.params.id));
+    const todo = await todoService.getTodo(Number(req.params.id), req.user.id);
     res.json(todo);
   } catch (error) {
     next(error);
@@ -32,7 +32,7 @@ export const createTodo = async (req, res, next) => {
 
 export const deleteTodo = async (req, res, next) => {
   try {
-    const todo = await todoService.deleteTodo(Number(req.params.id));
+    const todo = await todoService.deleteTodo(Number(req.params.id), req.user.id);
     res.json({ message: "Todo deleted", todo });
   } catch (error) {
     next(error);
@@ -41,7 +41,7 @@ export const deleteTodo = async (req, res, next) => {
 
 export const updateTodo = async (req, res, next) => {
   try {
-    const todo = await todoService.updateTodo(Number(req.params.id), req.body);
+    const todo = await todoService.updateTodo(Number(req.params.id), req.user.id, req.body);
     res.json(todo);
   } catch (error) {
     next(error);

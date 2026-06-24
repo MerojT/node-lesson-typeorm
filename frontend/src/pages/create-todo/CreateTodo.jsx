@@ -24,6 +24,12 @@ function CreateTodo() {
       return
     }
 
+    if (form.description.trim() && form.description.trim().length < 2) {
+      setMessage("Tavsif kamida 2 ta harfdan iborat bo'lishi kerak! ⚠️")
+      setIsError(true)
+      return
+    }
+
     setLoading(true)
     try {
       const token = localStorage.getItem('token')

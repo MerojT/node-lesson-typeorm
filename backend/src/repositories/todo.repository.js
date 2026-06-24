@@ -10,8 +10,10 @@ export const findAllTodosByUserId = async (userId) => {
   });
 };
 
-export const findTodoById = async (id) => {
-  return todoRepo.findOneBy({ id });
+export const findTodoByIdAndUser = async (id, userId) => {
+  return todoRepo.findOne({
+    where: { id, user: { id: userId } }
+  });
 };
 
 export const createTodo = async ({ title, description, userId }) => {
@@ -23,14 +25,22 @@ export const createTodo = async ({ title, description, userId }) => {
   return todoRepo.save(todo);
 };
 
-export const deleteTodoById = async (id) => {
-  const todo = await todoRepo.findOneBy({ id });
+export const deleteTodoById = async (id, userId) => {
+  const todo = await todoRepo.findOne({ where: { id, user: { id: userId } } });
   if (!todo) return null;
+  
   await todoRepo.remove(todo);
   return todo;
 };
 
-export const updateTodoById = async (id, data) => {
-  await todoRepo.update(id, data);
-  return todoRepo.findOneBy({ id });
+export const updateTodoById = async (id, userId, data) => {
+  const todo = await todoRepo.findOne({ where: { id, user: { id: userId } } });
+  if (!todo) return null;
+
+  const { title, description, completed } = data;
+  if (title !== undefined) todo.title = title;
+  if (description !== undefined) todo.description = description;
+  if (completed !== undefined) todo.completed = completed;
+
+  return todoRepo.save(todo); 
 };
