@@ -19,7 +19,7 @@ function Register() {
     e.preventDefault()
     setLoading(true)
     try {
-      await axios.post('/api/users', {
+      await axios.post('http://localhost:3003/api/users', {
         ...form,
         age: form.age ? Number(form.age) : undefined,
       })
